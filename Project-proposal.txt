@@ -1,0 +1,18 @@
+(15 points) September 24, 2024: a 1-page project proposal, emailed to Dr.
+Emrich (not emailed to the TAs, not uploaded to Canvas). The proposal should
+name the team members, describe the software to be developed, outline the
+solution, and list any concerns or special needs. You should consider this a
+proposed contract.
+
+Members: Ian Henson and Ashwin ____
+
+Software Ideas: 
+1. Converting Zim archives and traversing this information for AI information storage and recall
+2. A genetic game of life
+3. Anticheat that isn't intrusive
+
+Expanding on Ideas:
+1. Enumerate through zim files, create a disjoint set of linked pages, from there use NLP to combine the information on each page into a directed graph, use this graph for a generative text model to understand what wods mean in the context of others.
+  - This is ideally to reflect how humnas perceive language
+2. Create a game using Unity that generates starting creatures using a genetic seed code, then observe how these creatures procreate, mutate, and compete for finite resources
+3. Anticheat software based on client side behavior and the server's observed behavior, allowing for better crossplatform support
