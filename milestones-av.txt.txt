@@ -1,0 +1,14 @@
+Name: Ashwin Vinod
+Team Member: Ian Henson
+
+Time Log:
+1 hour - Research and brainstorming the implementation process for the project.
+3 hours - Learning the basics of Unity in unity essentials by Unity Learn.
+1 hour - Worked on the FPS microgame tutorial on unity.
+
+GitHub Repository: https://github.com/tkd995/final-project
+
+Next Rubric:
+20 Points: Create a basic layout of a room for the game.
+10 Points: Create a basic character.
+10 Points: Make a layout for the implementation of the character and the goals in the game.
