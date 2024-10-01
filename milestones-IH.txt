@@ -4,7 +4,7 @@ started at 1:30-4:00, 7:00-8:15
 - compilable tasks
 - 1.5 hrs, what is being done currently with anticheat software, a couple of different facets of the infor graph
 - 1.5 hrs, what can be used as the anticheat demo, should we make cheats or just source something simple from github?
-- 
+- 1 hrs, unity the horrible technology that it is
 
 anti-cheat
 - use unity fps demo
