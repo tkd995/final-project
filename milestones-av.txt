@@ -9,6 +9,6 @@ Time Log:
 GitHub Repository: https://github.com/tkd995/final-project
 
 Next Rubric:
-20 Points: Create a basic layout of a room for the game.
-10 Points: Create a basic character.
-10 Points: Make a layout for the implementation of the character and the goals in the game.
+20 Points: Research more on how anticheats work.
+10 Points: Research on no captcha reCAPTCHA and its mouse tracking.
+10 Points: Start working on building an implementation.
