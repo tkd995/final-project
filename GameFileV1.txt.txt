@@ -1,0 +1,7 @@
+Download link: https://drive.google.com/drive/folders/1thkNiFt6o-sSY2nZy6EuCGi8mv3sjln2?usp=drive_link
+
+To Run: Download all the folders and run MyFirstGame.uproject and click open with unreal editor. Once the unreal editor is launched click the green play button to run the game.
+
+Use Unreal Editor 5.2 or above to open the game.
+
+I am working on building a different environment/map for the game. For now, i have used the default fps environment in unreal editor.
