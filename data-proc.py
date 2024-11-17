@@ -1,28 +1,43 @@
 import requests
 import json
+
 import spacy
-'''
-https://www.gutenberg.org/cache/epub/29765/pg29765.txt
-Webster's Unabridged Dictionary by Various
-'''
 nlp = spacy.load("en_core_web_lg")
 
-from datasets import load_dataset#import above from hugging face
+from datasets import load_dataset#import from hugging face
+#https://huggingface.co/datasets/npvinHnivqn/EnglishDictionary
+dictionary = load_dataset("npvinHnivqn/EnglishDictionary", data_files="ee.csv")
+#https://huggingface.co/datasets/fraug-library/synonyms_dictionnaries
+synonyms = load_dataset("fraug-library/synonyms_dictionnaries", data_files="thesaurus_eng_US.csv")
 
-#https://huggingface.co/datasets/npvinHnivqn/EnglishDictionary?row=0
-ds = load_dataset("npvinHnivqn/EnglishDictionary", data_files="ee.csv")
-
+print("Beginning word processing")
 with open("dictionary.json", "w+") as f:
 	ite = 0
-	for i in ds["train"]:
-		if ite%1000 == 0:print(ite/len(ds["train"]))
-		i['similarities'] = {}
-		for j in ds["train"]:#going to have to ignore the values on the diagnol
-			if j["word"]:i["similarities"] = nlp(i["word"])[0].similarity(nlp(j["word"]))
+	for i in dictionary["train"]:
+		if ite%2000 == 0 and ite != 0:print(int(round(ite/len(dictionary["train"]), 2)*100))
+		try:
+			doc = nlp(i["word"])[0]#get various parts of speech with nlp
+		except Exception:
+			continue#catch None cases
 
-		f.write(json.dumps(i, indent=4)+"\n")
+		#i["lexeme"] = doc.lex
+		i["lemma"] = doc.lemma_
+		i["norm"] = doc.norm_
+		i["pos"] = doc.pos_
+
+		#start of connections made to other tokens
+
+		f.write(json.dumps(i)+"\n")
 		ite+=1
 
 	f.close()
 
-### Currently loads english dict, and pull similarity to other words from spacy(functional synonyms and antonyms)
+with open("syns.json", "w+") as s:
+	syns = {}
+	for i in synonyms["train"]:
+		syns[i["word"]] = i["synonyms"]
+		
+	s.write(json.dumps(syns))
+	s.close()
+
+### Currently load dictionary english dict and english synonyms into maps
