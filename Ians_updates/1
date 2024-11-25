@@ -1,9 +1,38 @@
 Ian Henson
-10/29/24
+9/30/2024
+started at 1:30-4:00, 7:00-8:15
+- compilable tasks
+- 1.5 hrs, what is being done currently with anticheat software, a couple of different facets of the infor graph
+- 1.5 hrs, what can be used as the anticheat demo, should we make cheats or just source something simple from github?
+- 1 hrs, unity the horrible technology that it is
 
-2 hr: unity install and base game dl(not just an installer I am running linux)
+anti-cheat
+- use unity fps demo
+- sourcing cheats: 
+	- seems like a thurough repo: https://github.com/dsasmblr/game-hacking
+	- also appears to be an intersting thing: https://github.com/ethanedits/Universal-Unity-ESP
 
-After this and working to find the things to hook into for cheats. I pitched adjusting the project to something more appealing to our interests. We are now implementing the disjoint set information based intelligence, with a front end videogame/experience.
+- how to port from c# to cpp:
+	-https://docs.unity3d.com/Manual/web-interacting-browsers-c-to-unity.html
 
-1.5hr: Http server for interaction between two parts
-1.75 hrs: beginning the theory for my disjoint intelligence, as well as, reading the docs for a standard NLP library(spacy), considering I don't know the inner structure but know I need to tokenize input it will be useful no matter what.
+- research how this is done by others:
+	- https://www.pcgamer.com/according-to-experts-on-kernel-level-anticheat-two-things-are-abundantly-clear-1-its-not-perfect-and-2-its-not-going-anywhere/
+		- seems that kernel level "isnt going anywhere"
+		- however the intrusiveness allowed hackers special access to these computers
+		- souls games didn't use kernel level anticheat until the newest title
+
+	- going to take the academic route from here
+	- https://helda.helsinki.fi/server/api/core/bitstreams/89d7c14b-58e0-441f-a0de-862254f95551/content
+		- seems pretty promising ch6
+
+information graph:
+- Create a disjoint set of articles in archive
+	- allows one to determine word proximity via disjoint set enum, for the graph
+- parse text with spacy
+	- convert words into individual nodes(conotation as well as proper nouns)
+- generate a graph with NetworkX or PyVis
+- traverse graph and/or subgraph to determine meaning
+
+- research means of traversing graph data, storing this data, and associating words with traits
+
+- The research part of this project hasn't been too bad, kinda anxious about working with unity but oh well.
