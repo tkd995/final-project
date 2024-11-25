@@ -1,9 +1,0 @@
-Ian Henson
-10/29/24
-
-2 hr: unity install and base game dl(not just an installer I am running linux)
-
-After this and working to find the things to hook into for cheats. I pitched adjusting the project to something more appealing to our interests. We are now implementing the disjoint set information based intelligence, with a front end videogame/experience.
-
-1.5hr: Http server for interaction between two parts
-1.75 hrs: beginning the theory for my disjoint intelligence, as well as, reading the docs for a standard NLP library(spacy), considering I don't know the inner structure but know I need to tokenize input it will be useful no matter what.
