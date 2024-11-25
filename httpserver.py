@@ -1,8 +1,15 @@
 import thread
 import http, socketserver
 
+import tensorflow as tf
+
+
 class connhandler(http.server.BaseHTTPRequestHandler):
 	context = []
+	model = tf.keras.saving.load_model("model.keras")
+
+	def generate_output():
+		return self.model.predict(context)
 
 	def pull_data(self, start):
 		data = ""
@@ -21,7 +28,7 @@ class connhandler(http.server.BaseHTTPRequestHandler):
 			context = []
 		else:
 			pull_data(i)
-			self.request.send(generate_output(context[-1]))
+			self.request.send(generate_output())
 		
 
 with socketserver.TCPServer(("", 888), connhandler) as httpd:
