@@ -6,5 +6,6 @@ UNAMED: Bot for NPC gaming experience
 - backend: http server communitcating both ways with homebrewed language model and user
 
 backend install:
-  - CUDA is a neccessary dependent, the install process differes for a few different factors
-  - first execution will download the model, this is the 1B model so it is much smaller then the others in the llama fmaily(~2gb)
+  - ollama setup, see https://ollama.com/
+  - run 'ollama pull llama3.2:1b'
+  - run python3 http
