@@ -1,35 +1,36 @@
+import requests
+import json
+
 import thread
-import http, socketserver
+import socketserver
 
-import tensorflow as tf
+#import tensorflow as tf
 
 
-class connhandler(http.server.BaseHTTPRequestHandler):
+class connhandler(socketserver.BaseRequestHandler):
 	context = []
-	model = tf.keras.saving.load_model("model.keras")
+	#model = tf.keras.saving.load_model("model.keras")
 
-	def generate_output():
-		return self.model.predict(context)
+	def generate_output(self):
+		req = requests.post("http://localhost:11434/api/chat", data=json.dumps({"model":"llama3.2:1b", "messages":self.context, "stream":False}), stream=False, timeout=9999)
+		try:
+			v = req.json()["message"]
+			self.context.append(v)
+			print(v["content"])
+		except KeyError:
+			print(str(req.text))
 
-	def pull_data(self, start):
-		data = ""
-		while True:
-			t = self.request.readline()
-
-			if data == "":
-				self.context.append(data)
-				break
-			else:
-				data+=t
-
-	def do_GET(self):
-		i = self.request.recv(1024)
+	def handle(self):
+		i = self.request.recv(4098).decode()
+		i = i[i.rfind(":")+2:-2]
+		print(i)
 		if(i == "rs"):
 			context = []
 		else:
-			pull_data(i)
-			self.request.send(generate_output())
+			self.context.append({"role":"user", "content":i})
+			self.generate_output()
+			self.request.send(self.context[-1]["content"].encode())
 		
 
-with socketserver.TCPServer(("", 888), connhandler) as httpd:
+with socketserver.TCPServer(("", 80), connhandler) as httpd:
 	httpd.serve_forever()
