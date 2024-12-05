@@ -13,7 +13,7 @@ synonyms = load_dataset("fraug-library/synonyms_dictionnaries", data_files="thes
 print("Beginning word processing")
 with open("dictionary.json", "w+") as f:
 	ite = 0
-	for i in dictionary["train"]:
+	for i in dictionary["train"]:#iterate through dict and write to json file, information generated using spacy's NLP
 		if ite%2000 == 0 and ite != 0:print(int(round(ite/len(dictionary["train"]), 2)*100))
 		try:
 			doc = nlp(i["word"])[0]#get various parts of speech with nlp
@@ -25,14 +25,12 @@ with open("dictionary.json", "w+") as f:
 		i["norm"] = doc.norm_
 		i["pos"] = doc.pos_
 
-		#start of connections made to other tokens
-
 		f.write(json.dumps(i)+"\n")
 		ite+=1
 
 	f.close()
 
-with open("syns.json", "w+") as s:
+with open("syns.json", "w+") as s:#iterate and write to file of synonyms
 	syns = {}
 	for i in synonyms["train"]:
 		syns[i["word"]] = i["synonyms"]
