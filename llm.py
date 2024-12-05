@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 import libzim
 import json
 
-dictionary = open("dictionary.json", "r")
+dictionary = open("dictionary.json", "r")#load processed files and wikipedia zim
 
 zim = libzim.Archive("wikipedia_en_all_nopic_2024-06.zim")
 searcher = libzim.Searcher(zim)
@@ -27,24 +27,24 @@ for i in dictionary:
 	i = json.loads(i)
 	
 	ite+=1
-	if ite/wordlen >= prev+1:
+	if ite/wordlen >= prev+1:#print each ~1% progress
 		prev = ite/wordlen
 		print(round(ite/wordlen, 2))
 	#if i["pos"] != "NOUN" and i["pos"] != "PROPN":continue
 
 	training.append(i["word"]+":"+i["definition"])
 	
-	s = searcher.search(libzim.Query().set_query(i["word"])).getResults(0, 1000)
+	s = searcher.search(libzim.Query().set_query(i["word"])).getResults(0, 1000)#read top articles for each word, standard NLP processing
 	for page in s:
 		doc = zim.get_entry_by_path(page)
-		while doc.is_redirect:
+		while doc.is_redirect:#if reference to another page get to that one
 			doc = doc.get_redirect_entry()
 
 		html_page = (doc.get_item().content.tobytes()).decode()
-		bs = BeautifulSoup(html_page, 'html.parser')
+		bs = BeautifulSoup(html_page, 'html.parser')#convert webpage displayed to plaintext
 		
 		main = bs.find_all(attrs={"class":"content"}, recursive=True)[0]
-		title = main.find_all("h1", recursive=True)[0].text
+		title = main.find_all("h1", recursive=True)[0].text#title of article
 
 		if title in scanned:continue
 		print(doc.path)
@@ -58,14 +58,15 @@ for i in dictionary:
 				break
 
 		for paragraph in div.find_all("p", recursive=False):
-			text += paragraph.text+"\n"
+			text += paragraph.text+"\n"#find all paragraphs in article, does cutout all tables and such
 
 		extracted_zim.write(text+"######DELIMITER#####\n")#incase/when crashes
 
 		training.append(text)
 		scanned.append(title)
 
-#paramaters
+#paramaters for model
+#everything south never had the chance to get tested
 vocab_size = len(training)+1
 embed = 128
 max_seq_len = 50 #make way longer later
