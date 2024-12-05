@@ -12,7 +12,9 @@
 #include <fstream>
 
 using namespace std;
-
+/*
+This is something I wanted to test but never actually did, I just dont like how much waste python causes so 
+*/
 void connect_words_def(unordered_map<string, vector<*string>> &connections, auto doc){
 
 	for(auto token: doc){
